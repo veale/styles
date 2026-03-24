@@ -10,7 +10,7 @@
     <title-short>Oxford University Standard for Citation of Legal Authorities</title-short>
     <id>http://www.zotero.org/styles/oscola-5</id>
     <link href="http://www.zotero.org/styles/oscola-5" rel="self"/>
-<link href="https://www.law.ox.ac.uk/oscola" rel="documentation"/>
+    <link href="https://www.law.ox.ac.uk/oscola" rel="documentation"/>
     <author>
       <name>Michael Veale</name>
       <uri>https://orcid.org/0000-0002-2342-8785</uri>
@@ -126,7 +126,7 @@
       </else-if>
       <else-if type="broadcast">
         <!--
-          OSCOLA 5 s 3.7.2: podcast — use personal author if present; fall back to
+          OSCOLA 5 s 3.7.2: podcast &#8212; use personal author if present; fall back to
           publisher/series name. Store the personal author in 'author', or the series/
           network name in 'publisher' if there is no individual author.
         -->
@@ -359,7 +359,7 @@
           </if>
           <else-if type="broadcast">
             <!--
-              OSCOLA 5 s 3.7.2: podcasts — format: Author, 'Episode title' (Series name, date) timestamp <URL>
+              OSCOLA 5 s 3.7.2: podcasts &#8212; format: Author, 'Episode title' (Series name, date) timestamp <URL>
               Store the series/show name in 'container-title'. The timestamp locator appears
               between the closing parenthesis and the URL.
             -->
@@ -371,7 +371,7 @@
           </else-if>
           <else-if type="post">
             <!--
-              OSCOLA 5 s 3.7.1: social media posts — format: @Handle (Platform, date, time) <URL>
+              OSCOLA 5 s 3.7.1: social media posts &#8212; format: @Handle (Platform, date, time) <URL>
               Store the platform name (Twitter, Instagram etc.) in 'container-title'; if absent,
               'publisher' is used. CSL has no time-of-posting variable: append the time to the
               date field manually (e.g. '26 June 2023, 9:13pm GMT+1').
@@ -526,7 +526,6 @@
       </if>
     </choose>
   </macro>
-
   <macro name="court">
     <choose>
       <if variable="number"/>
@@ -635,14 +634,14 @@
   </macro>
   <citation disambiguate-add-givenname="false">
     <!--
-      OSCOLA 5 s 1.2.3: ibid is abolished. All subsequent citations — including immediately
-      repeated ones — use the short-form cross-citation (author + note number).
+      OSCOLA 5 s 1.2.3: ibid is abolished. All subsequent citations &#8212; including immediately
+      repeated ones &#8212; use the short-form cross-citation (author + note number).
     -->
     <!--
       No trailing full stop on footnote citations. OSCOLA guidance calls for a terminal
-      period, but removing it allows practitioners to compose complex footnotes manually —
+      period, but removing it allows practitioners to compose complex footnotes manually &#8212;
       e.g. a case (which CSL cannot fully render) followed by a secondary source followed
-      by annotation — without the auto-generated citation producing a mid-sentence full stop.
+      by annotation &#8212; without the auto-generated citation producing a mid-sentence full stop.
       Juris-M formerly offered a UI toggle for this behaviour; no equivalent exists in
       current Zotero. Users who want the terminal period should add it manually after the
       citation field ends in the word processor.
@@ -707,7 +706,6 @@
             <group delimiter=", ">
               <group delimiter=" ">
                 <text macro="page-first"/>
-
                 <text macro="court"/>
                 <text macro="locator-space"/>
               </group>
@@ -753,7 +751,6 @@
         </group>
         <group delimiter=" ">
           <text macro="page-first"/>
-
           <text macro="court"/>
         </group>
         <text macro="URL"/>
