@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" and="text" class="note" delimiter-precedes-last="never" demote-non-dropping-particle="never" et-al-min="4" et-al-use-first="1" initialize-with="" name-delimiter=", " version="1.0" default-locale="en-GB">
+  <!--
+    Updated to OSCOLA 5th edition by Michael Veale.
+    Original OSCOLA 4 style by Sebastian Karcher and Andrew Dunning.
+    Licensed under Creative Commons Attribution-ShareAlike 3.0.
+  -->
+  <info>
+    <title>OSCOLA 5th edition</title>
+    <title-short>Oxford University Standard for Citation of Legal Authorities</title-short>
+    <id>http://www.zotero.org/styles/oscola-5</id>
+    <link href="http://www.zotero.org/styles/oscola-5" rel="self"/>
+<link href="https://www.law.ox.ac.uk/oscola" rel="documentation"/>
+    <author>
+      <name>Michael Veale</name>
+      <uri>https://orcid.org/0000-0002-2342-8785</uri>
+    </author>
+    <contributor>
+      <name>Sebastian Karcher</name>
+      <uri>https://orcid.org/0000-0001-8249-7388</uri>
+    </contributor>
+    <contributor>
+      <name>Andrew Dunning</name>
+      <uri>https://orcid.org/0000-0003-0464-5036</uri>
+    </contributor>
+    <category citation-format="note"/>
+    <category field="law"/>
+    <summary>Oxford University Standard for Citation of Legal Authorities, 5th edition, notes system. Updated from OSCOLA 4 by Michael Veale; original style by Sebastian Karcher and Andrew Dunning. This version does not include full stops after footnote citations, allowing the user to add sequential legal references not possible to support in CSL styles.</summary>
+    <updated>2026-03-24T00:00:00+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <locale>
+    <terms>
+      <term name="et-al">and others</term>
+      <term form="short" name="first-reference-note-number">
+        <single>n.</single>
+        <multiple>nn.</multiple>
+      </term>
+      <term form="short" name="section">
+        <single>s</single>
+        <multiple>ss</multiple>
+      </term>
+      <term form="short" name="translator">
+        <single>tr.</single>
+        <multiple>trs.</multiple>
+      </term>
+    </terms>
+  </locale>
+  <!-- Variable labels -->
+  <macro name="label-edition">
+    <group delimiter=" ">
+      <choose>
+        <if is-numeric="edition">
+          <number form="ordinal" variable="edition"/>
+          <label form="short" strip-periods="true" variable="edition"/>
+        </if>
+        <else>
+          <text variable="edition"/>
+        </else>
+      </choose>
+    </group>
+  </macro>
+  <macro name="label-first-reference-note-number">
+    <group delimiter=" ">
+      <label form="short" strip-periods="true" variable="first-reference-note-number"/>
+      <text variable="first-reference-note-number"/>
+    </group>
+  </macro>
+  <macro name="label-locator">
+    <group delimiter=" ">
+      <choose>
+        <if locator="page"/>
+        <else>
+          <label form="short" strip-periods="true" variable="locator"/>
+        </else>
+      </choose>
+      <text variable="locator"/>
+    </group>
+  </macro>
+  <macro name="label-locator-all">
+    <group delimiter=" ">
+      <label form="short" strip-periods="true" variable="locator"/>
+      <text variable="locator"/>
+    </group>
+  </macro>
+  <macro name="label-volume">
+    <group delimiter=" ">
+      <choose>
+        <if is-numeric="volume">
+          <label form="short" strip-periods="true" variable="volume"/>
+        </if>
+      </choose>
+      <text variable="volume"/>
+    </group>
+  </macro>
+  <!--Authors and Persons-->
+  <macro name="author-note">
+    <!--for bills & hearing this should start with jurisdiction once available-->
+    <choose>
+      <if type="interview">
+        <group delimiter=", ">
+          <names variable="interviewer">
+            <name initialize="false"/>
+          </names>
+          <group delimiter=" ">
+            <text term="interview" text-case="capitalize-first"/>
+            <text form="verb" term="contributor"/>
+            <names variable="author">
+              <name initialize="false"/>
+            </names>
+          </group>
+        </group>
+      </if>
+      <else-if type="personal_communication">
+        <group delimiter=" ">
+          <text variable="genre"/>
+          <text term="from"/>
+          <names variable="author">
+            <name initialize="false"/>
+          </names>
+          <names variable="recipient">
+            <label form="verb" suffix=" "/>
+            <name initialize="false"/>
+          </names>
+        </group>
+      </else-if>
+      <else-if type="broadcast">
+        <!--
+          OSCOLA 5 s 3.7.2: podcast — use personal author if present; fall back to
+          publisher/series name. Store the personal author in 'author', or the series/
+          network name in 'publisher' if there is no individual author.
+        -->
+        <names variable="author">
+          <name initialize="false"/>
+          <substitute>
+            <text variable="publisher"/>
+          </substitute>
+        </names>
+      </else-if>
+      <else-if match="any" type="legal_case legislation"/>
+      <else>
+        <names variable="author">
+          <name initialize="false"/>
+          <label form="short" prefix=" (" strip-periods="true" suffix=")"/>
+          <substitute>
+            <names variable="editor"/>
+            <names variable="translator"/>
+            <text macro="title"/>
+          </substitute>
+        </names>
+      </else>
+    </choose>
+  </macro>
+  <macro name="author-short">
+    <choose>
+      <if type="interview">
+        <group delimiter=", ">
+          <names variable="interviewer">
+            <name form="short"/>
+          </names>
+          <group delimiter=" ">
+            <text term="interview" text-case="capitalize-first"/>
+            <text form="verb" term="contributor"/>
+            <names variable="author">
+              <name form="short"/>
+            </names>
+          </group>
+        </group>
+      </if>
+      <else-if type="personal_communication">
+        <group delimiter=" ">
+          <group delimiter=" ">
+            <text variable="genre"/>
+            <text term="from"/>
+            <names variable="author">
+              <name form="short"/>
+            </names>
+          </group>
+          <names variable="recipient">
+            <label form="verb" suffix=" "/>
+            <name form="short"/>
+          </names>
+        </group>
+      </else-if>
+      <else-if type="broadcast">
+        <!-- OSCOLA 5 s 3.7.2: short-form podcast author; falls back to publisher/series name -->
+        <names variable="author">
+          <name form="short"/>
+          <substitute>
+            <text variable="publisher"/>
+          </substitute>
+        </names>
+      </else-if>
+      <else>
+        <names variable="author">
+          <name form="short"/>
+          <substitute>
+            <names variable="editor"/>
+            <names variable="translator"/>
+            <text macro="title"/>
+          </substitute>
+        </names>
+      </else>
+    </choose>
+  </macro>
+  <macro name="author-bib">
+    <!--for bills & hearing this should start with jurisdiction once available-->
+    <choose>
+      <if type="interview">
+        <group delimiter=", ">
+          <names variable="interviewer">
+            <name name-as-sort-order="all" sort-separator=" "/>
+          </names>
+          <group delimiter=" ">
+            <text term="interview" text-case="capitalize-first"/>
+            <text form="verb" term="contributor"/>
+            <names variable="author">
+              <name initialize="false"/>
+            </names>
+          </group>
+        </group>
+      </if>
+      <else-if type="personal_communication">
+        <group delimiter=" ">
+          <group delimiter=", ">
+            <names variable="author">
+              <name name-as-sort-order="all" sort-separator=" "/>
+            </names>
+            <text variable="genre"/>
+          </group>
+          <names variable="recipient">
+            <label form="verb" suffix=" "/>
+            <name initialize="false"/>
+          </names>
+        </group>
+      </else-if>
+      <else-if type="broadcast">
+        <!-- OSCOLA 5 s 3.7.2: bibliography podcast author; falls back to publisher/series name -->
+        <names variable="author">
+          <name name-as-sort-order="all" sort-separator=" "/>
+          <substitute>
+            <text variable="publisher"/>
+          </substitute>
+        </names>
+      </else-if>
+      <else-if match="any" type="legal_case legislation"/>
+      <else>
+        <names variable="author">
+          <name name-as-sort-order="all" sort-separator=" "/>
+          <label form="short" prefix=" (" strip-periods="true" suffix=")"/>
+          <substitute>
+            <names variable="editor"/>
+            <names variable="translator"/>
+            <text macro="title"/>
+          </substitute>
+        </names>
+      </else>
+    </choose>
+  </macro>
+  <macro name="editor">
+    <choose>
+      <if match="none" type="chapter entry-encyclopedia paper-conference">
+        <names delimiter=", " variable="container-author editor translator">
+          <name initialize="false"/>
+          <label form="short" prefix=" " strip-periods="true"/>
+        </names>
+      </if>
+    </choose>
+  </macro>
+  <macro name="editor-chapter">
+    <group delimiter=" ">
+      <text term="in"/>
+      <names delimiter=", " variable="container-author editor translator">
+        <name initialize="false"/>
+        <label form="short" prefix=" (" strip-periods="true" suffix=")"/>
+      </names>
+    </group>
+  </macro>
+  <!-- Titles -->
+  <macro name="title">
+    <choose>
+      <if match="any" type="book motion_picture treaty">
+        <text font-style="italic" text-case="title" variable="title"/>
+      </if>
+      <else-if match="any" type="bill legislation">
+        <text variable="title"/>
+      </else-if>
+      <else-if type="legal_case">
+        <text font-style="italic" strip-periods="true" variable="title"/>
+      </else-if>
+      <else-if type="thesis">
+        <!-- OSCOLA 5 s 3.7.6: thesis titles are italicised, not in inverted commas -->
+        <text font-style="italic" text-case="title" variable="title"/>
+      </else-if>
+      <else-if type="post">
+        <!-- OSCOLA 5 s 3.7.1: social media posts carry no title; the handle is the author -->
+      </else-if>
+      <else>
+        <text quotes="true" text-case="title" variable="title"/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="title-short">
+    <choose>
+      <if match="any" type="book motion_picture treaty">
+        <text font-style="italic" form="short" text-case="title" variable="title"/>
+      </if>
+      <else-if match="any" type="bill legislation">
+        <text form="short" variable="title"/>
+      </else-if>
+      <else-if type="legal_case">
+        <text font-style="italic" form="short" variable="title"/>
+      </else-if>
+      <else-if type="thesis">
+        <!-- OSCOLA 5 s 3.7.6: thesis titles are italicised, not in inverted commas -->
+        <text font-style="italic" form="short" text-case="title" variable="title"/>
+      </else-if>
+      <else-if type="post">
+        <!-- OSCOLA 5 s 3.7.1: social media posts carry no title -->
+      </else-if>
+      <else>
+        <text form="short" quotes="true" text-case="title" variable="title"/>
+      </else>
+    </choose>
+  </macro>
+  <!--Dates-->
+  <macro name="issued-year">
+    <date date-parts="year" form="numeric" variable="issued"/>
+  </macro>
+  <macro name="issued-full">
+    <date form="text" variable="issued"/>
+  </macro>
+  <macro name="date-parenthesis">
+    <choose>
+      <if match="any" type="bill legislation">
+        <text macro="issued-year"/>
+      </if>
+      <else-if match="none" type="article-journal article-magazine legal_case"/>
+      <else-if variable="authority number">
+        <text macro="issued-year" prefix="[" suffix="]"/>
+      </else-if>
+      <else-if variable="volume">
+        <text macro="issued-year" prefix="(" suffix=")"/>
+      </else-if>
+      <else-if match="any" variable="container-title number volume">
+        <!--no year in square brackets for unreported case w/o medium neutral citation-->
+        <text macro="issued-year" prefix="[" suffix="]"/>
+      </else-if>
+    </choose>
+  </macro>
+  <!--publication info -->
+  <macro name="publisher">
+    <group delimiter=" ">
+      <group delimiter=", " prefix="(" suffix=")">
+        <choose>
+          <if type="article-newspaper">
+            <!-- OSCOLA 5 s 3.7.7: city of publication removed for newspaper articles -->
+            <date form="text" variable="issued"/>
+          </if>
+          <else-if type="broadcast">
+            <!--
+              OSCOLA 5 s 3.7.2: podcasts — format: Author, 'Episode title' (Series name, date) timestamp <URL>
+              Store the series/show name in 'container-title'. The timestamp locator appears
+              between the closing parenthesis and the URL.
+            -->
+            <text variable="container-title"/>
+            <date form="text" variable="issued"/>
+          </else-if>
+          <else-if match="any" type="personal_communication treaty">
+            <date form="text" variable="issued"/>
+          </else-if>
+          <else-if type="post">
+            <!--
+              OSCOLA 5 s 3.7.1: social media posts — format: @Handle (Platform, date, time) <URL>
+              Store the platform name (Twitter, Instagram etc.) in 'container-title'; if absent,
+              'publisher' is used. CSL has no time-of-posting variable: append the time to the
+              date field manually (e.g. '26 June 2023, 9:13pm GMT+1').
+            -->
+            <choose>
+              <if variable="container-title">
+                <text variable="container-title"/>
+              </if>
+              <else>
+                <text variable="publisher"/>
+              </else>
+            </choose>
+            <date form="text" variable="issued"/>
+          </else-if>
+          <else-if match="any" type="bill legislation">
+            <!--this should be jurisdiction we use code instead-->
+            <text strip-periods="true" variable="container-title"/>
+          </else-if>
+          <else-if match="any" type="article book chapter entry-encyclopedia interview manuscript motion_picture paper-conference post-weblog report speech thesis webpage">
+            <names variable="director">
+              <label form="verb" suffix=" " text-case="capitalize-first"/>
+              <name initialize="false"/>
+            </names>
+            <text macro="editor"/>
+            <choose>
+              <!--if none of these, this we don't want edition either. Might be Loose-Leaf-->
+              <if match="any" variable="container-title genre issued publisher">
+                <text macro="label-edition"/>
+              </if>
+            </choose>
+            <choose>
+              <if type="speech">
+                <text variable="event"/>
+                <text variable="event-place"/>
+                <text macro="issued-full"/>
+              </if>
+              <else-if type="thesis">
+                <text strip-periods="true" variable="genre"/>
+                <group delimiter=" ">
+                  <text strip-periods="true" variable="publisher"/>
+                  <text macro="issued-year"/>
+                </group>
+              </else-if>
+              <else-if match="any" type="post-weblog webpage">
+                <text font-style="italic" variable="container-title"/>
+                <text macro="issued-full"/>
+              </else-if>
+              <else-if type="interview">
+                <text macro="issued-full"/>
+              </else-if>
+              <else-if type="article">
+                <text strip-periods="true" variable="publisher"/>
+                <text macro="issued-full"/>
+              </else-if>
+              <else>
+                <group delimiter=" ">
+                  <text strip-periods="true" variable="publisher"/>
+                  <text macro="issued-year"/>
+                </group>
+              </else>
+            </choose>
+          </else-if>
+        </choose>
+      </group>
+      <choose>
+        <if match="any" type="interview manuscript report">
+          <text strip-periods="true" variable="genre"/>
+          <text variable="number"/>
+        </if>
+      </choose>
+    </group>
+  </macro>
+  <macro name="looseleaf-note">
+    <choose>
+      <if match="any" variable="issued publisher"/>
+      <else-if type="book" variable="locator">
+        <group delimiter=" ">
+          <text macro="label-locator-all"/>
+          <text prefix="(" suffix=")" variable="edition"/>
+        </group>
+      </else-if>
+    </choose>
+  </macro>
+  <macro name="volume-book">
+    <choose>
+      <if match="any" type="book chapter report">
+        <text macro="label-volume"/>
+      </if>
+    </choose>
+  </macro>
+  <macro name="book-container">
+    <choose>
+      <if match="any" type="chapter entry-encyclopedia paper-conference">
+        <group delimiter=", ">
+          <text macro="editor-chapter"/>
+          <text font-style="italic" variable="container-title"/>
+        </group>
+      </if>
+    </choose>
+  </macro>
+  <macro name="bill-number">
+    <choose>
+      <if type="bill">
+        <text prefix="[" suffix="]" variable="number"/>
+      </if>
+    </choose>
+  </macro>
+  <macro name="article-case-info">
+    <choose>
+      <if match="any" type="article-journal article-magazine article-newspaper legal_case">
+        <group delimiter=", ">
+          <!--Assume that only cases with a Medium Neutral Citation have a docket number -->
+          <!--
+            OSCOLA 5 s 4.4.2: EU Court of Justice cases should be cited by ECLI where available,
+            omitting the ECR citation. Store the ECLI in the 'number' field (e.g. EU:C:1995:441)
+            and leave 'volume', 'container-title' and 'page' blank. CSL cannot suppress volume/page
+            fields based on the value of 'number', so this is a data-entry convention: when 'number'
+            contains an ECLI and the ECR fields are left blank, only the ECLI will be rendered.
+            UK domestic cases with both a docket number and a law report citation should store
+            the docket number in 'number' and the law report in 'volume'/'container-title'/'page' as normal.
+          -->
+          <choose>
+            <if variable="authority number">
+              <group delimiter=" ">
+                <text form="short" strip-periods="true" variable="authority"/>
+                <text variable="number"/>
+              </group>
+            </if>
+          </choose>
+          <group delimiter=" ">
+            <text variable="volume"/>
+            <choose>
+              <if type="legal_case" variable="container-title">
+                <text form="short" strip-periods="true" variable="container-title"/>
+              </if>
+              <else-if match="any" type="article-magazine article-newspaper">
+                <text font-style="italic" variable="container-title"/>
+              </else-if>
+              <else>
+                <text variable="container-title"/>
+              </else>
+            </choose>
+          </group>
+        </group>
+      </if>
+    </choose>
+  </macro>
+  <macro name="page-first">
+    <choose>
+      <if match="none" type="chapter report paper-conference">
+        <text variable="page-first"/>
+      </if>
+    </choose>
+  </macro>
+
+  <macro name="court">
+    <choose>
+      <if variable="number"/>
+      <else-if type="legal_case">
+        <text prefix="(" strip-periods="true" suffix=")" variable="authority"/>
+      </else-if>
+    </choose>
+  </macro>
+  <macro name="locator-basic">
+    <choose>
+      <if locator="paragraph" type="legal_case">
+        <text prefix="[" suffix="]" variable="locator"/>
+      </if>
+      <else-if type="legal_case" variable="container-title number page volume"/>
+      <else-if type="legal_case" variable="authority">
+        <text variable="locator"/>
+      </else-if>
+      <else>
+        <text macro="label-locator"/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="locator-space">
+    <choose>
+      <if locator="paragraph" type="legal_case">
+        <text prefix="[" suffix="]" variable="locator"/>
+      </if>
+      <else-if type="legal_case" variable="container-title number page volume"/>
+      <else-if type="legal_case" variable="authority">
+        <text variable="locator"/>
+      </else-if>
+      <else-if type="book" variable="issued">
+        <text macro="label-locator"/>
+      </else-if>
+      <else-if type="book" variable="publisher">
+        <text macro="label-locator"/>
+      </else-if>
+      <else-if match="any" type="article-journal article-magazine book legislation"/>
+      <else>
+        <text macro="label-locator"/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="locator-comma">
+    <choose>
+      <if locator="paragraph" type="legal_case"/>
+      <else-if type="legal_case" variable="container-title number page volume">
+        <text variable="locator"/>
+      </else-if>
+      <else-if type="legal_case" variable="authority"/>
+      <else-if type="legal_case">
+        <text variable="locator"/>
+      </else-if>
+      <else-if match="any" type="article-journal article-magazine legislation">
+        <text macro="label-locator"/>
+      </else-if>
+    </choose>
+  </macro>
+  <!--Others -->
+  <macro name="treaty-catchall">
+    <choose>
+      <if type="treaty">
+        <text variable="genre"/>
+      </if>
+    </choose>
+  </macro>
+  <macro name="URL">
+    <choose>
+      <if match="any" type="bill legal_case legislation"/>
+      <else-if match="any" variable="DOI URL">
+        <group delimiter=" ">
+          <choose>
+            <if variable="DOI">
+              <text prefix="&lt;https://doi.org/" suffix="&gt;" variable="DOI"/>
+            </if>
+            <else>
+              <text prefix="&lt;" suffix="&gt;" variable="URL"/>
+            </else>
+          </choose>
+          <group delimiter=" ">
+            <text term="accessed"/>
+            <date form="text" variable="accessed"/>
+          </group>
+        </group>
+      </else-if>
+    </choose>
+  </macro>
+  <macro name="author-count">
+    <names variable="author">
+      <name form="count"/>
+      <substitute>
+        <names variable="editor"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="sort-type">
+    <!-- sort secondary sources first -->
+    <choose>
+      <if match="any" type="bill hearing legal_case legislation regulation treaty">
+        <text value="1"/>
+      </if>
+      <else>
+        <text value="0"/>
+      </else>
+    </choose>
+  </macro>
+  <citation disambiguate-add-givenname="false">
+    <!--
+      OSCOLA 5 s 1.2.3: ibid is abolished. All subsequent citations — including immediately
+      repeated ones — use the short-form cross-citation (author + note number).
+    -->
+    <!--
+      No trailing full stop on footnote citations. OSCOLA guidance calls for a terminal
+      period, but removing it allows practitioners to compose complex footnotes manually —
+      e.g. a case (which CSL cannot fully render) followed by a secondary source followed
+      by annotation — without the auto-generated citation producing a mid-sentence full stop.
+      Juris-M formerly offered a UI toggle for this behaviour; no equivalent exists in
+      current Zotero. Users who want the terminal period should add it manually after the
+      citation field ends in the word processor.
+    -->
+    <layout delimiter="; ">
+      <choose>
+        <if position="subsequent">
+          <choose>
+            <if match="any" type="bill hearing legal_case legislation regulation treaty">
+              <!--don't use short form and above note for legal citations -->
+              <group delimiter=" ">
+                <text macro="author-note"/>
+                <text macro="title-short"/>
+                <text macro="looseleaf-note"/>
+                <choose>
+                  <if match="none" type="legislation">
+                    <text macro="label-first-reference-note-number" prefix="(" suffix=")"/>
+                  </if>
+                </choose>
+                <text macro="label-locator"/>
+              </group>
+            </if>
+            <else>
+              <!--general short citation -->
+              <group delimiter=" ">
+                <group delimiter=", ">
+                  <text macro="author-short"/>
+                  <choose>
+                    <if disambiguate="true">
+                      <text macro="title-short"/>
+                    </if>
+                  </choose>
+                </group>
+                <text macro="label-first-reference-note-number" prefix="(" suffix=")"/>
+                <text macro="locator-basic"/>
+              </group>
+            </else>
+          </choose>
+        </if>
+        <else>
+          <group delimiter=" ">
+            <group delimiter=", ">
+              <group delimiter=" ">
+                <group delimiter=", ">
+                  <text macro="author-note"/>
+                  <group delimiter=" ">
+                    <text macro="title"/>
+                    <text macro="book-container"/>
+                  </group>
+                  <text macro="volume-book"/>
+                  <text macro="looseleaf-note"/>
+                </group>
+                <group delimiter=" ">
+                  <text macro="date-parenthesis"/>
+                  <text macro="bill-number"/>
+                  <text macro="article-case-info"/>
+                  <text macro="publisher"/>
+                </group>
+              </group>
+              <text macro="treaty-catchall"/>
+            </group>
+            <group delimiter=", ">
+              <group delimiter=" ">
+                <text macro="page-first"/>
+
+                <text macro="court"/>
+                <text macro="locator-space"/>
+              </group>
+              <text macro="locator-comma"/>
+            </group>
+            <text macro="URL"/>
+          </group>
+        </else>
+      </choose>
+    </layout>
+  </citation>
+  <bibliography subsequent-author-substitute="&#8212;&#8212;">
+    <sort>
+      <key macro="sort-type"/>
+      <key macro="author-bib" names-min="1" names-use-first="1"/>
+      <key macro="author-count" names-min="2" names-use-first="2"/>
+      <key macro="author-bib"/>
+      <key variable="issued"/>
+      <key variable="title"/>
+    </sort>
+    <layout>
+      <!-- OSCOLA 5 s 1.7: no terminal full stop in bibliography entries -->
+      <group delimiter=" ">
+        <group delimiter=", ">
+          <group delimiter=" ">
+            <group delimiter=", ">
+              <text macro="author-bib"/>
+              <group delimiter=" ">
+                <text macro="title"/>
+                <text macro="book-container"/>
+              </group>
+              <text macro="volume-book"/>
+              <text macro="looseleaf-note"/>
+            </group>
+            <group delimiter=" ">
+              <text macro="date-parenthesis"/>
+              <text macro="bill-number"/>
+              <text macro="article-case-info"/>
+              <text macro="publisher"/>
+            </group>
+          </group>
+          <text macro="treaty-catchall"/>
+        </group>
+        <group delimiter=" ">
+          <text macro="page-first"/>
+
+          <text macro="court"/>
+        </group>
+        <text macro="URL"/>
+      </group>
+    </layout>
+  </bibliography>
+</style>
