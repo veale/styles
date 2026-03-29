@@ -1,3 +1,5 @@
 .env
 spec/sheldon/ci.json
 .DS_Store
+.claude
+.oscola-test
